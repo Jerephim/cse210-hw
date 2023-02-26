@@ -56,20 +56,26 @@ class Program
         Delay(3);
 
         Console.WriteLine("Breathe in...");
-        Delay(2);
+        Delay(4);
+
+        Console.WriteLine("Hold breath...");
+        Delay(7);
 
         Console.WriteLine("Breathe out...");
-        Delay(2);
-
+        Delay(8);
+        duration -= 19;
         while (duration > 0)
         {
             Console.WriteLine("Breathe in...");
-            Delay(2);
+            Delay(4);
+
+            Console.WriteLine("Hold breath...");
+            Delay(7);
 
             Console.WriteLine("Breathe out...");
-            Delay(2);
+            Delay(8);
 
-            duration -= 4;
+            duration -= 19;
         }
 
         Console.WriteLine("Good job! You have completed the Breathing Activity for {0} seconds.", duration + 4);
@@ -102,7 +108,10 @@ class Program
             "Think of a time when you stood up for someone else.",
             "Think of a time when you did something really difficult.",
             "Think of a time when you helped someone in need.",
-            "Think of a time when you did something truly selfless."
+            "Think of a time when you did something truly selfless.",
+            "Thing of a time you felt powerful",
+            "Think of a time where you felt calm",
+            "" 
         };
         string[] questions = {
                 "Why was this experience meaningful to you?",
@@ -119,18 +128,18 @@ class Program
         {
             string prompt = prompts[random.Next(prompts.Length)];
             Console.WriteLine(prompt);
-            Delay(2);
+            Delay(15);
 
-            
+            duration -= 15;
 
             foreach (string question in questions)
             {
                 Console.Write("  {0}... ", question);
                 Spinner();
-                Delay(2);
+                Delay(15);
             }
 
-            duration -= (prompts.Length * (questions.Length + 1)) * 2;
+            duration -= 15;
         }
 
         Console.WriteLine("Good job! You have completed the Reflection Activity for {0} seconds.", duration + (prompts.Length * (questions.Length + 1)) * 2);
@@ -141,8 +150,29 @@ class Program
     {
         Console.WriteLine("Listing Activity");
         Console.WriteLine("This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.");
+        Console.WriteLine("What area would you like to focus on? (e.g. things you're grateful for, achievements, happy memories)");
+        string area = Console.ReadLine();
         int duration = GetDuration();
 
-        Console.WriteLine("Gotta finish from here");
+        Console.WriteLine("Get ready to begin...");
+        Delay(3);
+
+        Console.WriteLine("Start listing {0}.", area);
+
+        int count = 0;
+        while (duration > 0)
+        {
+            Console.Write("{0}. ", count + 1);
+            Spinner();
+            Console.WriteLine();
+            Delay(15);
+
+            duration -= 15;
+            count++;
+        }
+
+        Console.WriteLine("Good job! You have listed {0} {1} in the Listing Activity.", count, area);
+        Delay(3);
     }
+
 }
