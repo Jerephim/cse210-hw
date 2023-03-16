@@ -20,7 +20,6 @@ namespace Journal
                 Console.WriteLine("4. Quit");
 
                 string input = Console.ReadLine();
-                Console.Clear();
 
                 switch (input)
                 {
