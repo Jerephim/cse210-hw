@@ -4,18 +4,18 @@ using System.IO;
 
 namespace Journal
 {
-    class Journal
+    class Entry
     {
-        private readonly string fileName;
+        private readonly string _fileName;
 
-        public Journal(string fileName)
+        public Entry(string fileName)
         {
-            this.fileName = fileName;
+            this._fileName = fileName;
         }
 
         public void WriteEntry(string entry)
         {
-            using (StreamWriter sw = File.AppendText(fileName))
+            using (StreamWriter sw = File.AppendText(_fileName))
             {
                 sw.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}: {entry}");
             }
@@ -24,7 +24,7 @@ namespace Journal
         public List<string> ListEntries()
         {
             List<string> entries = new List<string>();
-            using (StreamReader sr = File.OpenText(fileName))
+            using (StreamReader sr = File.OpenText(_fileName))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
@@ -37,7 +37,7 @@ namespace Journal
 
         public string ReadEntry(string date)
         {
-            using (StreamReader sr = File.OpenText(fileName))
+            using (StreamReader sr = File.OpenText(_fileName))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
@@ -51,6 +51,7 @@ namespace Journal
             return "Journal entry not found.";
         }
     }
+
     class Program
     {
         static void Main(string[] args)
@@ -59,7 +60,7 @@ namespace Journal
             Console.Write(">>> ");
             string fileName = Console.ReadLine();
 
-            Journal journal = new Journal(fileName);
+            Entry journal = new Entry(fileName);
             bool quit = false;
 
             while (!quit)
