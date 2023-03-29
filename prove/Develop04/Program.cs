@@ -78,14 +78,14 @@ class Program
             duration -= 19;
         }
 
-        Console.WriteLine("Good job! You have completed the Breathing Activity for {0} seconds.", duration + 4);
+        Console.WriteLine("Good job! You have completed the Breathing Activity.");
         Delay(3);
     }
     static void Spinner()
     {
         string[] spinner = { "|", "/", "-", "\\" };
         int spinnerIndex = 0;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 150; i++)
         {
             Console.Write(spinner[spinnerIndex % spinner.Length] + " ");
             spinnerIndex++;
@@ -97,7 +97,7 @@ class Program
     static void ReflectionActivity()
     {
         Console.WriteLine("Reflection Activity");
-        Console.WriteLine("This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.");
+        Console.WriteLine("This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life. For the best experience input a big number (greater than 300).");
         int duration = GetDuration();
 
         Console.WriteLine("Get ready to begin...");
@@ -111,35 +111,36 @@ class Program
             "Think of a time when you did something truly selfless.",
             "Thing of a time you felt powerful",
             "Think of a time where you felt calm",
-            "" 
         };
         string[] questions = {
-                "Why was this experience meaningful to you?",
-                "Have you ever done anything like this before?",
-                "How did you get started?",
-                "How did you feel when it was complete?",
-                "What made this time different than other times when you were not as successful?",
-                "What is your favorite thing about this experience?",
-                "What could you learn from this experience that applies to other situations?",
-                "What did you learn about yourself through this experience?",
-                "How can you keep this experience in mind in the future?"
+            "Why was this experience meaningful to you?",
+            "Have you ever done anything like this before?",
+            "How did you get started?",
+            "How did you feel when it was complete?",
+            "What made this time different than other times when you were not as successful?",
+            "What is your favorite thing about this experience?",
+            "What could you learn from this experience that applies to other situations?",
+            "What did you learn about yourself through this experience?",
+            "How can you keep this experience in mind in the future?"
             };
         while (duration > 0)
         {
             string prompt = prompts[random.Next(prompts.Length)];
             Console.WriteLine(prompt);
-            Delay(15);
+            Spinner();
 
             duration -= 15;
 
             foreach (string question in questions)
             {
-                Console.Write("  {0}... ", question);
+                Console.Write(question);
                 Spinner();
-                Delay(15);
+                duration -= 15;
+                if (duration <= 0)
+                {
+                    break;
+                }
             }
-
-            duration -= 15;
         }
 
         Console.WriteLine("Good job! You have completed the Reflection Activity for {0} seconds.", duration + (prompts.Length * (questions.Length + 1)) * 2);
@@ -151,28 +152,22 @@ class Program
         Console.WriteLine("Listing Activity");
         Console.WriteLine("This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.");
         Console.WriteLine("What area would you like to focus on? (e.g. things you're grateful for, achievements, happy memories)");
-        string area = Console.ReadLine();
-        int duration = GetDuration();
+        string focus = Console.ReadLine();
+        Console.WriteLine("How many things would you like to list?");
+        int times = int.Parse(Console.ReadLine());
+        Console.WriteLine("Start listing {0}.", focus);
 
-        Console.WriteLine("Get ready to begin...");
-        Delay(3);
-
-        Console.WriteLine("Start listing {0}.", area);
-
-        int count = 0;
-        while (duration > 0)
+        int amount = 0;
+        while (times > 0)
         {
-            Console.Write("{0}. ", count + 1);
-            Spinner();
-            Console.WriteLine();
-            Delay(15);
+            amount++;
+            Console.Write(amount+ ". ");
+            Console.ReadLine();
 
-            duration -= 15;
-            count++;
+            times -= 1;
         }
 
-        Console.WriteLine("Good job! You have listed {0} {1} in the Listing Activity.", count, area);
+        Console.WriteLine("Good job! You have listed {0} {1} in the Listing Activity.", amount, focus);
         Delay(3);
     }
-
 }
